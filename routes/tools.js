@@ -29,11 +29,12 @@ router.get('/:id', (req, res) => {
     })
 })
 
+// POST a tool
 router.post('/add', (req, res) => {
     const userData = req.body
     connect.query('INSERT INTO equipement SET ?', userData, (err) => {
         if (err) {
-            res.status(500).send('Sorry, a problem has occurred while adding this user.')
+            res.status(500).send('Sorry, a problem has occurred while adding this tool.')
         }
         else {
             res.status(200).send('Tool successfully added.')
@@ -41,11 +42,12 @@ router.post('/add', (req, res) => {
     })
 })
 
+// DELETE a tool
 router.delete('/:id', (req, res) => {
     const id = req.params.id
     connect.query('DELETE FROM equipement WHERE equipement.id=?', id, (err) => {
         if (err) {
-            res.status(500).send('Sorry, a problem has occurred while removing this user.')
+            res.status(500).send('Sorry, a problem has occurred while removing this tool.')
         }
         else {
             res.status(200).send('Tool successfully removed.')
