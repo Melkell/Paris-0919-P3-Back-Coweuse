@@ -2,7 +2,7 @@ const mysql = require('mysql')
 
 const connect = mysql.createConnection({
     host: 'localhost',
-    user: '',
+    user: 'root',
     password: '',
     database: 'Outcool',
     multipleStatements: true
