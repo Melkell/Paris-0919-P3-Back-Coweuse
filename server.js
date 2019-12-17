@@ -25,10 +25,9 @@ app.use('/users', userRouter)
 const toolRouter = require('./routes/tools')
 app.use('/tools', toolRouter)
 
-// Test route
-app.get('/', (req, res) => {
-    res.status(200).send(`Everything's ok`)
-})
+// Missions route
+const missionRouter = require('./routes/production')
+app.use('/productions', missionRouter)
 
 // Requests :
 
