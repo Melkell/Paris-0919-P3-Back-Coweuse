@@ -21,4 +21,32 @@ router.get('/', (req, res) => {
   });
 });
 
+// GET an user by id
+router.get('/:id', (req, res) => {
+  const id = req.params.id;
+
+  connection.query('SELECT * FROM user WHERE id = ?', id, (err, results) => {
+    if (err) {
+      res.status(500).send('Erreur lors de la récupération du user')
+    } else {
+      res.json(results)
+    }
+  });
+});
+
+//POST to add a new user
+router.post('/add', (req, res) => {
+  const userData = req.body;
+  
+  connection.query('INSERT INTO user SET ?', userData, (err, results) => {
+    if (err) {
+      res.status(500).send("Erreur lors de l'ajout du user")
+    } else {
+      res.status(201).send(`User ${userData.first_name} ${userData.last_name} added`)
+    }
+  });
+});
+
+
+
 module.exports = router;
