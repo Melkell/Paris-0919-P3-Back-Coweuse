@@ -34,6 +34,20 @@ router.get('/:id', (req, res) => {
   });
 });
 
+//GET an user's mission
+router.get('/:id/mission', (req, res) => {
+  const userId = req.params.user_id;
+
+  connection.query('SELECT * FROM mission_user WHERE user_id = ? ', userId, (err, results) => {
+    if (err) {
+      console.log(err)
+      res.status(500).send('Erreur lors de la récupération de la mission du user')
+    } else {
+      res.status(200).send('Mission du user assignée')
+    }
+  });
+});
+
 //POST to add a new user
 router.post('/add', (req, res) => {
   const userData = req.body;
