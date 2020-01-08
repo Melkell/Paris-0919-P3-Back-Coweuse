@@ -47,6 +47,18 @@ router.post('/add', (req, res) => {
   });
 });
 
+router.delete('/delete/:id', (req, res) => {
+  const deleteId = req.params.id;
+
+  connection.query('DELETE FROM user WHERE id = ?', deleteId, (err, results) => {
+    if (err) {
+      console.log(err)
+      res.status(500).send('Erreur lors de la suppression du user')
+    } else {
+      res.status(200).send(`User has been successfully deleted from database`)
+    }
+  });
+});
 
 
 module.exports = router;
