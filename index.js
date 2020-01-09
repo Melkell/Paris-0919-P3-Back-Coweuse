@@ -3,6 +3,9 @@ const express = require('express');
 const routes = require('./routes/routes');
 const app = express();
 
+//Default port
+const port = process.env.PORT || 3000;
+
 const bodyParser = require('body-parser');
 
 // Support JSON-encoded bodies
@@ -11,9 +14,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-
-//Default port
-const port = process.env.PORT || 3000;
 
 app.use('/api', routes);
 

@@ -6,7 +6,8 @@ const production = require('./production')
 
 router.get('/user', user.getUsers);
 router.get('/exploitation/:id', exploitation.getExploitationById)
-router.get('/parcelle/:exploitationId', parcelle.countParcelleById)
+router.get('/exploitation/:id/parcelles', exploitation.getNumberParcellesByExploitationId)
+router.get('/exploitation/:id/productions', exploitation.getNumberProductionsByEploitationId)
 // router.put('/user', user.updateUserById);
 // router.put('/production', production.updateProductionById)
 // router.use('/production', production)
