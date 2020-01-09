@@ -1,7 +1,7 @@
 const connection = require('../conf');
 
 // POST a new equipement
-const createEquipement = (req, res) => {
+const addEquipement = (req, res) => {
   const equipementData = req.body
 
   connection.query('INSERT INTO equipement SET ?', equipementData, (err, results) => {
@@ -41,7 +41,7 @@ const deleteEquipement = (req, res) => {
 }
 
 module.exports = {
-  createEquipement,
+  addEquipement,
   updateEquipement,
   deleteEquipement
 }

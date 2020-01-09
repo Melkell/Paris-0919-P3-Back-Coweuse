@@ -16,11 +16,11 @@ router.get('/exploitation/:id/productions', exploitation.getNumberProductionsByE
 router.get('/exploitation/:id/users', exploitation.getNumberUsersByExploitationId)
 
 // Ressources (users) admin
-router.post('/user/create', user.createUser);
+router.post('/user/add', user.addUser);
 router.put('/user/update/:id', user.updateUser);
 router.delete('/user/delete/:id', user.deleteUser);
 // Ressources (equipements) admin
-router.post('/equipement/create', equipement.createEquipement);
+router.post('/equipement/add', equipement.addEquipement);
 router.put('/equipement/update/:id', equipement.updateEquipement);
 router.delete('/equipement/delete/:id', equipement.deleteEquipement);
 
