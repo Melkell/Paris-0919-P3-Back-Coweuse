@@ -4,8 +4,6 @@ const exploitation = require('./exploitation');
 const user = require('./user');
 const equipement = require('./equipement');
 
-// const parcelle = require('./parcelle');
-// const production = require('./production')
 
 
 
@@ -23,6 +21,10 @@ router.delete('/user/delete/:id', user.deleteUser);
 router.post('/equipement/add', equipement.addEquipement);
 router.put('/equipement/update/:id', equipement.updateEquipement);
 router.delete('/equipement/delete/:id', equipement.deleteEquipement);
+
+
+router.get('/equipement/sous-type', equipement.getSousType)
+router.get('/equipement/sous-type/type', equipement.getType)
 
 
 

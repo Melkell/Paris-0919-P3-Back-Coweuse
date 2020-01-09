@@ -2,6 +2,7 @@ const connection = require('../conf');
 
 // POST a new user
 const addUser = (req, res) => {
+
   const userData = req.body
 
   connection.query('INSERT INTO user SET ?', userData, (err, results) => {
@@ -15,6 +16,7 @@ const addUser = (req, res) => {
 
 // MODIFY a user
 const updateUser = (req, res) => {
+
   const userId = req.params.id;
   const userData = req.body;
 
@@ -29,6 +31,7 @@ const updateUser = (req, res) => {
 
 // DELETE a user
 const deleteUser = (req, res) => {
+  
   const userId = req.params.id;
 
   connection.query('DELETE FROM user WHERE id = ?', userId, (err, results) => {
