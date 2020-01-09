@@ -8,7 +8,7 @@ const createUser = (req, res) => {
     if (err) {
       res.status(500).send("Erreur lors de l'ajout du user")
     } else {
-      res.json(results)
+      res.json(results).send("User ajouté")
     }
   });
 }
@@ -35,7 +35,7 @@ const deleteUser = (req, res) => {
     if (err) {
       res.status(500).send('Erreur lors de la suppression du user')
     } else {
-      res.status(200).send(`Le user a bien été supprimé`)
+      res.status(200).send("User supprimé")
     }
   });
 }
