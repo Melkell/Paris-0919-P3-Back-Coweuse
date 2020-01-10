@@ -1,7 +1,7 @@
 const connection = require('../conf');
 
 const getMissionById = (req, res) => {
-  const missionId = req.params.id
+  const missionId = req.params.id;
 
   connection.query('SELECT * FROM mission WHERE id = ?', missionId, (err, results) => {
     if (err) {
