@@ -30,5 +30,6 @@ router.get('/equipement/sous-type/type', equipement.getType)
 
 // Dashboard collaborateur
 router.get('/mission/:id', dashboardCollab.getMissionById)
+router.get('/mission/task/:id', dashboardCollab.getTasksById)
 
 module.exports = router;
