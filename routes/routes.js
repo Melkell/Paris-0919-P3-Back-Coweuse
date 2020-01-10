@@ -3,6 +3,7 @@ const router = require('express').Router();
 const exploitation = require('./exploitation');
 const user = require('./user');
 const equipement = require('./equipement');
+const mission = require('./mission');
 
 
 
@@ -27,7 +28,9 @@ router.get('/equipement/sous-type', equipement.getSousType)
 router.get('/equipement/sous-type/type', equipement.getType)
 
 
-
+router.post('/mission/add', mission.addMission);
+router.put('/mission/update/:id', mission.updateMission);
+router.delete('/mission/delete/:id', mission.deleteMission);
 
 // router.put('/user', user.updateUserById);
 // router.put('/production', production.updateProductionById)
