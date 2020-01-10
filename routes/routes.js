@@ -5,9 +5,6 @@ const user = require('./user');
 const equipement = require('./equipement');
 const dashboardCollab = require('./dashboardCollab');
 
-
-
-
 // Dashboard admin
 router.get('/exploitation/:id', exploitation.getExploitationById)
 router.get('/exploitation/:id/parcelles', exploitation.getNumberParcellesByExploitationId)
@@ -26,9 +23,6 @@ router.delete('/equipement/delete/:id', equipement.deleteEquipement);
 
 router.get('/equipement/sous-type', equipement.getSousType)
 router.get('/equipement/sous-type/type', equipement.getType)
-
-
-
 
 // router.put('/user', user.updateUserById);
 // router.put('/production', production.updateProductionById)
