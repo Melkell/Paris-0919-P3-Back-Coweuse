@@ -12,17 +12,6 @@ const getRoleName = (req, res) => {
   });
 }
 
-// GET exploitation name
-const getExploitationName = (req, res) => {
-  connection.query('SELECT name FROM exploitation', (err, results) => {
-    if (err) {
-      res.status(500).send("Erreur lors de la récupération des noms des exploitations")
-    } else {
-      res.json(results)
-    }
-  });
-}
-
 // POST a new user
 const addUser = (req, res) => {
 
@@ -66,9 +55,9 @@ const deleteUser = (req, res) => {
   });
 }
 
+
 module.exports = {
   getRoleName,
-  getExploitationName,
   addUser,
   updateUser,
   deleteUser

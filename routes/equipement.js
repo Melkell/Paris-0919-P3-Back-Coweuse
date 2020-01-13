@@ -1,7 +1,6 @@
 const connection = require('../conf');
 
 
-
 // GET sous_type of equipements
 const getSousType = (req, res) => {
 
@@ -25,9 +24,6 @@ const getType = (req, res) => {
     }
   });
 }
-
-
-
 
 // POST a new equipement
 const addEquipement = (req, res) => {
@@ -71,6 +67,7 @@ const deleteEquipement = (req, res) => {
     }
   });
 }
+
 
 module.exports = {
 	getSousType,
