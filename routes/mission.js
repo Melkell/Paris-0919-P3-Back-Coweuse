@@ -1,5 +1,6 @@
 const connection = require('../conf');
 
+
 // POST a new mission
 const addMission = (req, res) => {
 
