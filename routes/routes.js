@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const exploitation = require('./exploitation');
+const parcelle = require('./parcelle')
 const production = require('./production')
 const user = require('./user');
 const equipement = require('./equipement');
@@ -41,9 +42,13 @@ router.delete('/equipement/delete/:id', equipement.deleteEquipement);
 // Itineraire admin
 // GET list
 router.get('/exploitation/:id/all-itineraires', exploitation.getAllItinerairesByExploitationId)
-router.get('/production/name', production.getProductionName)
+router.get('/production/All', production.getProduction)
 router.get('/exploitation/:id/all-parcelles', exploitation.getAllParcellesByExploitationId);
-// POST - PUT - DELETE
+// POST - PUT - DELETE parcelle
+router.post('/parcelle/add', parcelle.addParcelle);
+router.put('/parcelle/update/:id', parcelle.updateParcelle);
+router.delete('/parcelle/delete/:id', parcelle.deleteParcelle);
+// POST - PUT - DELETE itineraire
 router.post('/itineraire/add', itineraire.addItineraire);
 router.put('/itineraire/update/:id', itineraire.updateItineraire);
 router.delete('/itineraire/delete/:id', itineraire.deleteItineraire);
