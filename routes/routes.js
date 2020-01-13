@@ -19,8 +19,8 @@ router.get('/exploitation/:id/nb-users', exploitation.getNumberUsersByExploitati
 // Ressources (users) admin
 // GET list
 router.get('/exploitation/:id/all-users', exploitation.getAllUsersByExploitationId);
-router.get('/user/add/role-name', user.getRoleName);
 router.get('/exploitation/name', exploitation.getExploitationName);
+router.get('/user/add/role-name', user.getRoleName);
 // POST - PUT - DELETE
 router.post('/user/add', user.addUser);
 router.put('/user/update/:id', user.updateUser);
@@ -62,6 +62,9 @@ router.get('/itineraire/:id/all-missions', itineraire.getAllMissionsByItineraire
 router.post('/mission/add', mission.addMission);
 router.put('/mission/update/:id', mission.updateMission);
 router.delete('/mission/delete/:id', mission.deleteMission);
+
+// GET infos production by month
+router.get('/itineraire/:id/missions/:month/:year', itineraire.getMissionsbyItineraireIdAndMonth)
 
 
 // router.put('/user', user.updateUserById);

@@ -6,8 +6,31 @@ const getAllMissionsByItineraireId = (req, res) => {
 
   const itineraireId = req.params.id
 
-  connection.query('SELECT * FROM mission WHERE exploitation_id = ?', itineraireId, (err, results) => {
+  connection.query('SELECT mission.* FROM mission JOIN mission_type ON mission.mission_type_id = mission_type.id WHERE itineraire_id = ?', itineraireId, (err, results) => {
     if (err) {
+      res.status(500).send("Erreur lors de la récupération des missions d'un itineraire")
+    } else {
+      res.json(results)
+    }
+  });
+}
+
+// GET 
+const getMissionsbyItineraireIdAndMonth = (req, res) => {
+
+  const itineraireId = req.params.id
+  const month = +req.params.month
+  const year = +req.params.year
+  
+  const startMonth = `${year}-${month}-01`
+  let endMonth = `${year}-${month+1}-01`
+  if (month === 12) {
+    endMonth = `${year+1}-01-01`
+  }
+  
+  connection.query('SELECT mission.* FROM mission JOIN mission_type ON mission.mission_type_id = mission_type.id WHERE mission.start_date >= ? AND mission.end_date <= ? AND mission_type.itineraire_id = ?', startMonth, endMonth, itineraireId, (err, results) => {
+    if (err) {
+      console.log('err', err);
       res.status(500).send("Erreur lors de la récupération des missions d'un itineraire")
     } else {
       res.json(results)
@@ -28,7 +51,7 @@ const addItineraire = (req, res) => {
     }
   });
   }
-  
+
 // MODIFY an itineraire
 const updateItineraire = (req, res) => {
 
@@ -43,10 +66,10 @@ const updateItineraire = (req, res) => {
     }
   });
 }
-  
+
 // DELETE an itineraire
 const deleteItineraire = (req, res) => {
-  
+
   const itineraireId = req.params.id;
 
   connection.query('DELETE FROM itineraire WHERE id = ?', itineraireId, (err, results) => {
@@ -61,6 +84,7 @@ const deleteItineraire = (req, res) => {
 
 module.exports = {
   getAllMissionsByItineraireId,
+  getMissionsbyItineraireIdAndMonth,
   addItineraire,
   updateItineraire,
   deleteItineraire
