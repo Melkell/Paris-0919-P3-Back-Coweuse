@@ -64,7 +64,7 @@ router.put('/mission/update/:id', mission.updateMission);
 router.delete('/mission/delete/:id', mission.deleteMission);
 
 // GET infos production by month
-router.get('/itineraire/:id/missions/:month/:year', itineraire.getMissionsbyItineraireIdAndMonth)
+// router.get('/itineraire/:id/missions/:month/:year', itineraire.getMissionsbyItineraireIdAndMonth)
 
 
 // router.put('/user', user.updateUserById);
