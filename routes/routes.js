@@ -5,6 +5,7 @@ const user = require('./user');
 const equipement = require('./equipement');
 const dashboardCollab = require('./dashboardCollab');
 const missionCollab = require('./missionCollab');
+const productionCollab = require('./productionCollab');
 
 // Dashboard admin
 router.get('/exploitation/:id', exploitation.getExploitationById)
@@ -36,6 +37,9 @@ router.get('/dashboard/task/:id', dashboardCollab.getTasksById);
 // Espace mission collaborateur
 router.get('/mission/:id', missionCollab.getMissionInfo);
 router.get('/mission/soustype/:mission_id', missionCollab.getMissionSousType);
-router.get('/mission/equipement/:equipement_id', missionCollab.getDateOfUseEquipment)
+router.get('/mission/equipement/:equipement_id', missionCollab.getDateOfUseEquipment);
+
+// Espace agenda collaborateur
+router.get('/agenda/production/:id', productionCollab.getProduction);
 
 module.exports = router;
