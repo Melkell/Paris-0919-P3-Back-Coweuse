@@ -34,12 +34,13 @@ router.get('/equipement/sous-type/type', equipement.getType);
 router.get('/dashboard/mission/:id', dashboardCollab.getMissionById);
 router.get('/dashboard/task/:id', dashboardCollab.getTasksById);
 
-// Espace mission collaborateur
+// Missions collaborateur
 router.get('/mission/:id', missionCollab.getMissionInfo);
 router.get('/mission/soustype/:mission_id', missionCollab.getMissionSousType);
+router.get('/mission/outil/:id', missionCollab.getTools);
 router.get('/mission/equipement/:equipement_id', missionCollab.getDateOfUseEquipment);
 
-// Espace agenda collaborateur
+// Agenda collaborateur
 router.get('/agenda/production/:id', productionCollab.getProduction);
 
 module.exports = router;
