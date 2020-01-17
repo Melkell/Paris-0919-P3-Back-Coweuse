@@ -5,7 +5,7 @@ const getMissionInfo = (req, res) => {
 
   connection.query('SELECT * FROM mission WHERE id = ?', missionId, (err, results) => {
     if (err) {
-      res.status(500).send('Erreur lors de la récupération de la mission')
+      res.status(500).send('Erreur lors de la récupération de la mission');
     } else {
       res.json(results);
     }
@@ -17,9 +17,9 @@ const getMissionSousType = (req, res) => {
   
   connection.query('SELECT * FROM mission_sous_type WHERE mission_id = ?', missionSousType, (err, results) => {
     if (err) {
-      res.status(500).send('Erreur lors de la récupération du sous type de la mission')
+      res.status(500).send('Erreur lors de la récupération du sous type de la mission');
     } else {
-      res.json(results)
+      res.json(results);
     }
   });
 };
@@ -29,9 +29,9 @@ const getTools = (req, res) => {
   
   connection.query('SELECT * FROM sous_type WHERE id = ?', missionTool, (err, results) => {
     if (err) {
-      res.status(500).send('Erreur lors de la récupération des outils')
+      res.status(500).send('Erreur lors de la récupération des outils');
     } else {
-      res.json(results)
+      res.json(results);
     }
   });
 };
@@ -41,9 +41,9 @@ const getDateOfUseEquipment = (req, res) => {
 
   connection.query('SELECT * FROM mission_equipement WHERE equipement_id = ?', dateOfUseEquipment, (err, results) => {
     if (err) {
-      res.status(500).send('Erreur lors de la récupération dun outil')
+      res.status(500).send('Erreur lors de la récupération dun outil');
     } else {
-      res.json(results)
+      res.json(results);
     }
   });
 };
