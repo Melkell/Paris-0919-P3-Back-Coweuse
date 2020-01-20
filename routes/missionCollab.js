@@ -51,6 +51,6 @@ const getDateOfUseEquipment = (req, res) => {
 module.exports = {
   getMissionInfo,
   getMissionSousType,
-  getDateOfUseEquipment,
-  getTools
+  getTools,
+  getDateOfUseEquipment
 }
