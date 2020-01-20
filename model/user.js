@@ -27,4 +27,4 @@ const userSchema = new mysql.Schema({
   }
 });
 
-module.exports = mysql.model('user', userSchema);
+module.exports = mysql.model('User', userSchema);
