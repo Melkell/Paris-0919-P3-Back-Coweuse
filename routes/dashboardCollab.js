@@ -1,5 +1,15 @@
 const connection = require('../conf');
 
+const getMissions = (req, res) => {
+  connection.query('SELECT * FROM mission', (err, results) => {
+    if (err) {
+      res.status(500).send('Erreur lors de la récupération des missions');
+    } else {
+      res.json(results);
+    }
+  });
+};
+
 const getMissionById = (req, res) => {
   const missionId = req.params.id;
 
@@ -26,5 +36,6 @@ const getTasksById = (req, res) => {
 
 module.exports = {
   getMissionById,
-  getTasksById
+  getTasksById,
+  getMissions
 }
