@@ -32,6 +32,7 @@ router.get('/equipement/sous-type/type', equipement.getType);
 
 // Dashboard collaborateur
 router.get('/dashboard/missions', dashboardCollab.getMissions);
+router.put('/dashboard/equipements', dashboardCollab.putMissions);
 router.get('/dashboard/equipements', dashboardCollab.getEquipements);
 router.get('/dashboard/mission/:id', dashboardCollab.getMissionById);
 router.get('/dashboard/task/:id', dashboardCollab.getTasksById);
