@@ -10,6 +10,16 @@ const getMissions = (req, res) => {
   });
 };
 
+const getEquipements = (req, res) => {
+  connection.query('SELECT * FROM equipement', (err, results) => {
+    if (err) {
+      res.status(500).send('Erreur lors de la récupération des equipements');
+    } else {
+      res.json(results);
+    }
+  });
+};
+
 const getMissionById = (req, res) => {
   const missionId = req.params.id;
 
@@ -37,5 +47,6 @@ const getTasksById = (req, res) => {
 module.exports = {
   getMissionById,
   getTasksById,
-  getMissions
+  getMissions,
+  getEquipements
 }
