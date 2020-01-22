@@ -11,11 +11,13 @@ const getMissions = (req, res) => {
 };
 
 const putMissions = (req, res) => {
-  const startDate = req.body.startDateTime
-  console.log(startDate.split("T"))
-  connection.query('UPDATE mission SET start_date WHERE id === 1', [startDate], (err, results) => {
+  const startDate = (req.body.startDateTime).split('.')[0]
+  const endDate = (req.body.endDateTime).split('.')[0]  
+  console.log(startDate)
+  console.log(endDate)  
+  connection.query('UPDATE mission SET start_date = ? WHERE name = "Commencement"', [startDate], (err, results) => {
     if (err) {
-      res.status(500).send('Erreur lors de la récupération des missions');
+      res.status(500).send(`Erreur lors de l'update 'missions`);
     } else {
       res.json(results);
     }
