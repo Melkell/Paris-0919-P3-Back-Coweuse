@@ -15,7 +15,7 @@ const putMissions = (req, res) => {
   const endDate = (req.body.endDateTime).split('.')[0]  
   console.log(startDate)
   console.log(endDate)  
-  connection.query('UPDATE mission SET start_date = ? WHERE name = "Commencement"', [startDate], (err, results) => {
+  connection.query('UPDATE mission SET start_date = ?, end_date = ? WHERE name = "Commencement"', [startDate, endDate], (err, results) => {
     if (err) {
       res.status(500).send(`Erreur lors de l'update 'missions`);
     } else {
