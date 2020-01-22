@@ -11,10 +11,10 @@ const getMissions = (req, res) => {
 };
 
 const putMissions = (req, res) => {
-  const startDate = (req.body.startDateTime).split('.')[0]
-  const endDate = (req.body.endDateTime).split('.')[0]  
+  const startDate = (req.body.startDateTime).split('Z')[0]
+  const endDate = (req.body.endDateTime).split('Z')[0]
   console.log(startDate)
-  console.log(endDate)  
+  console.log(endDate)
   connection.query('UPDATE mission SET start_date = ?, end_date = ? WHERE name = "Commencement"', [startDate, endDate], (err, results) => {
     if (err) {
       res.status(500).send(`Erreur lors de l'update 'missions`);
