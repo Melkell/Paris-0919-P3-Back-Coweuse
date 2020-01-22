@@ -1,55 +1,53 @@
 const router = require('express').Router;
-const User = require('../model/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const {registerValidation, loginValidation} = require('../validation');
+const connection = require('../conf');
 
-router.post('/register', async(req, res) => {
-  //Validate data before post to db
-  const {error} = registerValidation(req.body);
-  if(error) return res.status(400).send(error.details[0].message);
+require('dotenv').config(process.cwd(), '../.env')
 
-  //Checking if the user is already in the db
-  const emailExist = await User.findOne({email: req.body.email});
-  if(emailExist) return res.status(400).send('Email already exists');
+const secret = process.env.TOKEN_SECRET;
 
-  //Hash the password
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(req.body.password, salt);
+//Route post auth
 
-  //Create a new user
-  const user = new User({
-    first_name: req.body.first_name,
-    last_name: req.body.last_name,
-    email: req.body.email,
-    password: hashedPassword
-  });
-  try {
-    const savedUser = await user.save();
-    res.send({user: user.id});
-  } catch(err) {
-    res.status(400).send(err);
-  };
-});
+router.post('/',(req, res) => {
+  // Vérification du format de l'email fournit
+  const emailRegex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
+  if(!emailRegex.test(req.body.email)){
+    return res.status(401).send('Unauthorized user')
+  }
 
-router.post('/login', async(req, res) => {
-  //Validate data before login to db
-  const {error} = loginValidation(req.body);
-  if(error) return res.status(400).send(error.details[0].message);
+  const email = req.body.email;
+  const password = req.body.password;
 
-  //Checking if the user is already in the db
-  const user = await User.findOne({email: req.body.email});
-  if(!user) return res.status(400).send('Email not found');
+  // Récupération du user par l'email
+  connection.query(`SELECT * FROM user WHERE email = ?`, email, (err, results) => {
+    if (err) {
+      return res.status(500).send(err)
+    } else if (!results[0]) {
+      return res.status(409).send('Unknown user')
+    }
+  })
 
-  //Check if the password is correct
-  const validPassword = await bcrypt.compare(req.body.password, user.password);
-  if(!validPassword) return res.status(400).send('Invalid password');
+  // Test du mdp envoyé
+  const passwordIsValid = bcrypt.compareSync(password, results[0].password);
+  if(!passwordIsValid) {
+    return res.status(401).send({auth: false, token: null});
+  }
 
-  //Create and assign a token
-  const token = jwt.sign({id: user.id}, process.env.TOKEN_SECRET);
-  res.header('auth-token', token).send(token);
-  
-  res.send('Logged in!')
+  const token = jwt.sign(
+    {id : result[0].id, name: result[0].firstname, email: result[0].email}, 
+    secret,
+    {
+      expiresIn : '24h'
+    },
+    {
+      algorithm : 'RS256'
+    }
+  );
+
+  res.header('Access-Control-Expose-Headers', 'x-access-token');
+  res.set('x-acces-token', token);
+  res.status(200).send({auth: true});
 });
 
 module.exports = router;
