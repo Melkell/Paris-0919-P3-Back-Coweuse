@@ -6,11 +6,11 @@ const equipement = require('./equipement');
 const dashboardCollab = require('./dashboardCollab');
 const missionCollab = require('./missionCollab');
 const productionCollab = require('./productionCollab');
-//const auth = require('./recapAuth')
- const register = require('./register');
+const auth = require('./auth')
+const register = require('./register');
 
 // Authentification
-//router.post('/auth', auth.auth);
+router.post('/auth', auth);
 router.post('/register', register);
 
 // Dashboard admin
