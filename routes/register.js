@@ -1,22 +1,30 @@
-const router = require('express').Router;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const connection = require('../conf');
 
-router.post('/', (req,res) => {
-  const emailRegEx= /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
-  if(!emailRegEx.test(req.body.email)){
-    return res.status(401).send('Unauthorized user')
-  }
+const register = async (req, res) => {
+  const formFirst_name = req.body.first_name;
+  const formLast_name = req.body.last_name;
+  const formEmail = req.body.email;
+  const formPassword = req.body.password;
 
+  // Hash passwords
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(formPassword, salt);
+  
   const user = {
-    first_name : req.body.first_name,
-    last_name : req.body.last_name,
-    email : req.body.email,
-    password : bcrypt.hashSync(req.body.password)
+    first_name : formFirst_name,
+    last_name : formLast_name,
+    email : formEmail,
+    password : hashedPassword
   }
 
-  connection.query(`SELECT id FROM user WHERE email = ?`, user.email, (err, results) => {
+  const emailRegEx= /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
+  if(!emailRegEx.test(formEmail)){
+    return res.status(401).send('Invalid email')
+  }
+
+  connection.query(`SELECT email FROM user WHERE email = ?`, user.email, (err, results) => {
     if (err) {
       return res.status(500).send('Internal servor error')
     } else if (results.length>0) {
@@ -25,6 +33,7 @@ router.post('/', (req,res) => {
 
     connection.query(`INSERT INTO user SET ?`, user, (err, results) => {
       if (err) {
+        console.log(err)
         return res.status(500).send('Cannot register the user')
       }
 
@@ -36,6 +45,6 @@ router.post('/', (req,res) => {
       });
     });
   });
-});
+}
 
-module.exports = router;
+module.exports = register

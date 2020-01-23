@@ -15,6 +15,8 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+// app.use('/auth', routes.auth)
+// app.use('/register', routes.register)
 app.use('/api', routes);
 
 app.listen(port, (err) => {

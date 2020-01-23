@@ -1,4 +1,3 @@
-const router = require('express').Router;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const connection = require('../conf');
@@ -8,8 +7,7 @@ require('dotenv').config(process.cwd(), '../.env')
 const secret = process.env.TOKEN_SECRET;
 
 //Route post auth
-
-router.post('/',(req, res) => {
+const auth = (req, res) => {
   // Vérification du format de l'email fournit
   const emailRegex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
   if(!emailRegex.test(req.body.email)){
@@ -48,7 +46,7 @@ router.post('/',(req, res) => {
   res.header('Access-Control-Expose-Headers', 'x-access-token');
   res.set('x-acces-token', token);
   res.status(200).send({auth: true});
-});
+}
 
-module.exports = router;
+module.exports = {auth, router}
 

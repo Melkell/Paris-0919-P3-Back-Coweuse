@@ -6,12 +6,12 @@ const equipement = require('./equipement');
 const dashboardCollab = require('./dashboardCollab');
 const missionCollab = require('./missionCollab');
 const productionCollab = require('./productionCollab');
-const auth = require('./recapAuth');
-const register = require('./recapAuth');
+//const auth = require('./recapAuth')
+ const register = require('./register');
 
 // Authentification
-router.post('/auth', recapAuth.auth);
-router.post('/register', recapAuth.register);
+//router.post('/auth', auth.auth);
+router.post('/register', register);
 
 // Dashboard admin
 router.get('/exploitation/:id', exploitation.getExploitationById)
