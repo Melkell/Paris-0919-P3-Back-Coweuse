@@ -13,9 +13,11 @@ const getMissions = (req, res) => {
 const putMissions = (req, res) => {
   const startDate = (req.body.startDateTime).split('Z')[0]
   const endDate = (req.body.endDateTime).split('Z')[0]
-  console.log(startDate)
-  console.log(endDate)
-  connection.query(`UPDATE mission SET start_date = ?, end_date = ? WHERE id = 1`, [startDate, endDate], (err, results) => {
+  const idNum = req.body.id
+  //console.log(idNum)
+  //console.log(startDate)
+  //console.log(endDate)
+  connection.query(`UPDATE mission SET start_date = ?, end_date = ? WHERE id = ?`, [startDate, endDate, idNum], (err, results) => {
     if (err) {
       res.status(500).send(`Erreur lors de l'update 'missions`);
     } else {
