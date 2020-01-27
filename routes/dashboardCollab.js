@@ -3,7 +3,7 @@ const connection = require('../conf');
 const getMissionById = (req, res) => {
   const missionId = req.params.id;
 
-  connection.query('SELECT * FROM mission WHERE id = ?', missionId, (err, results) => {
+  connection.query('SELECT * FROM mission INNER JOIN mission_user WHERE user_id = ?', missionId, (err, results) => {
     if (err) {
       res.status(500).send('Erreur lors de la récupération des missions');
     } else {
