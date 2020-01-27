@@ -6,6 +6,15 @@ const user = require('./user');
 const equipement = require('./equipement');
 const itineraire = require('./itineraire')
 const mission = require('./mission');
+const dashboardCollab = require('./dashboardCollab');
+const missionCollab = require('./missionCollab');
+const productionCollab = require('./productionCollab');
+const auth = require('./auth')
+const register = require('./register');
+
+// Authentification
+router.post('/auth', auth);
+router.post('/register', register);
 
 
 // Dashboard admin
@@ -38,7 +47,6 @@ router.post('/equipement/add', equipement.addEquipement);
 router.put('/equipement/update/:id', equipement.updateEquipement);
 router.delete('/equipement/delete/:id', equipement.deleteEquipement);
 
-
 // Itineraire admin
 // GET list
 router.get('/exploitation/:id/all-itineraires', exploitation.getAllItinerairesByExploitationId)
@@ -66,10 +74,25 @@ router.delete('/mission/delete/:id', mission.deleteMission);
 // GET infos production by month
 // router.get('/itineraire/:id/missions/:month/:year', itineraire.getMissionsbyItineraireIdAndMonth)
 
+router.get('/equipement/sous-type', equipement.getSousType);
+router.get('/equipement/sous-type/type', equipement.getType);
+
 
 // router.put('/user', user.updateUserById);
 // router.put('/production', production.updateProductionById)
 // router.use('/production', production)
 
+// Dashboard collaborateur
+router.get('/dashboard/mission/:id', dashboardCollab.getMissionById);
+router.get('/dashboard/task/:id', dashboardCollab.getTasksById);
+
+// Missions collaborateur
+router.get('/mission/:id', missionCollab.getMissionInfo);
+router.get('/mission/soustype/:mission_id', missionCollab.getMissionSousType);
+router.get('/mission/outil/:id', missionCollab.getTools);
+router.get('/mission/equipement/:equipement_id', missionCollab.getDateOfUseEquipment);
+
+// Agenda collaborateur
+router.get('/agenda/production/:id', productionCollab.getProduction);
 
 module.exports = router;
