@@ -12,6 +12,18 @@ const getMissionById = (req, res) => {
   });
 };
 
+const getEquipementById = (req, res) => {
+  const equipementId = req.params.id;
+
+  connection.query('SELECT name FROM equipement INNER JOIN mission_equipement WHERE mission_id = ?', equipementId, (err, results) => {
+    if (err) {
+      res.status(500).send('Erreur lors de la récupération des outils de la mission')
+    } else {
+      res.json(results);
+    }
+  });
+}
+
 const getTasksById = (req, res) => {
   const taskId = req.params.id
 
@@ -26,5 +38,6 @@ const getTasksById = (req, res) => {
 
 module.exports = {
   getMissionById,
-  getTasksById
+  getTasksById,
+  getEquipementById
 }
