@@ -1,7 +1,7 @@
 const connection = require('../conf');
 
 const getMissions = (req, res) => {
-  connection.query('SELECT * FROM mission WHERE validation = 0 ', (err, results) => {
+  connection.query('SELECT * FROM mission WHERE validation = 0', (err, results) => {
     if (err) {
       res.status(500).send('Erreur lors de la récupération des missions');
     } else {
@@ -17,7 +17,7 @@ const putMissions = (req, res) => {
   //console.log(idNum)
   //console.log(startDate)
   //console.log(endDate)
-  connection.query(`UPDATE mission SET start_date = ?, end_date = ? WHERE id = ?`, [startDate, endDate, idNum], (err, results) => {
+  connection.query(`UPDATE mission SET start_date = ?, end_date = ?, validation = 1 WHERE id = ?`, [startDate, endDate, idNum], (err, results) => {
     if (err) {
       res.status(500).send(`Erreur lors de l'update 'missions`);
     } else {
@@ -39,7 +39,7 @@ const getEquipements = (req, res) => {
 const getMissionById = (req, res) => {
   const missionId = req.params.id;
 
-  connection.query('SELECT * FROM mission', (err, results) => {
+  connection.query('SELECT * FROM mission WHERE validation = 1', (err, results) => {
     if (err) {
       res.status(500).send('Erreur lors de la récupération des missions');
     } else {
