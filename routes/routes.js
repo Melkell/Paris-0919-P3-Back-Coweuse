@@ -6,7 +6,7 @@ const equipement = require('./equipement');
 const dashboardCollab = require('./dashboardCollab');
 const missionCollab = require('./missionCollab');
 const productionCollab = require('./productionCollab');
-const auth = require('./auth')
+const auth = require('./auth');
 const register = require('./register');
 
 // Authentification
@@ -14,10 +14,10 @@ router.post('/auth', auth);
 router.post('/register', register);
 
 // Dashboard admin
-router.get('/exploitation/:id', exploitation.getExploitationById)
-router.get('/exploitation/:id/parcelles', exploitation.getNumberParcellesByExploitationId)
-router.get('/exploitation/:id/productions', exploitation.getNumberProductionsByExploitationId)
-router.get('/exploitation/:id/users', exploitation.getNumberUsersByExploitationId)
+router.get('/exploitation/:id', exploitation.getExploitationById);
+router.get('/exploitation/:id/parcelles', exploitation.getNumberParcellesByExploitationId);
+router.get('/exploitation/:id/productions', exploitation.getNumberProductionsByExploitationId);
+router.get('/exploitation/:id/users', exploitation.getNumberUsersByExploitationId);
 
 // Ressources (users) admin
 router.post('/user/add', user.addUser);
