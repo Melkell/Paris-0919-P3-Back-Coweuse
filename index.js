@@ -1,10 +1,12 @@
 // Initializing express
 const express = require('express');
 const routes = require('./routes/routes');
+const cors = require('cors')
+
 const app = express();
 
 //Default port
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
 const bodyParser = require('body-parser');
 
@@ -14,6 +16,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+// CORS
+app.use(cors())
 
 // app.use('/auth', routes.auth)
 // app.use('/register', routes.register)
