@@ -8,7 +8,7 @@ const addMission = (req, res) => {
   console.log('First test')
 
   // Add all missions
-  connection.query('INSERT INTO missions (name) VALUES (?)', missionData, (err2, result2) => {
+  connection.query('INSERT INTO mission (name) VALUES (?)', missionData, (err2, result2) => {
     if (err2) {
       res.sendStatus(500)
     }
