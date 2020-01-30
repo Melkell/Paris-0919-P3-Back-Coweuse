@@ -8,23 +8,12 @@ const addMission = (req, res) => {
   console.log('First test')
 
   // Add all missions
-  connection.query('SELECT COUNT(*) FROM parcelle', (err, result) => {
-    if (err) {
+  connection.query('INSERT INTO missions (name) VALUES (?)', missionData, (err2, result2) => {
+    if (err2) {
       res.sendStatus(500)
     }
     else {
-      const nbParcelles = result
-      console.log(result)
-      for (let i = 0; i < nbParcelles; i++) {
-        connection.query('INSERT INTO missions (name) VALUES (?)', missionData, (err2, result2) => {
-          if (err2) {
-            res.sendStatus(500)
-          }
-          else {
-            res.status(200).send('Les missions de la production ont bien été ajoutées.')
-          }
-        })
-      }
+      res.status(200).send('Les missions de la production ont bien été ajoutées.')
     }
   })
 }
