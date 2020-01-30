@@ -13,11 +13,9 @@ const addMission = (req, res) => {
     }
     else {
       const nbParcelles = result
-      for (let i = 0; i < missionData * (nbParcelles - 1); i++) {
-        missionData[i].push(missionData[i])
-      }
-      for (let i = 0; i < missionData; i++) {
-        connection.query('INSERT INTO missions (name) VALUES (?)', missionData[i].name, (err2, result2) => {
+      console.log(result)
+      for (let i = 0; i < nbParcelles; i++) {
+        connection.query('INSERT INTO missions (name) VALUES (?)', missionData, (err2, result2) => {
           if (err2) {
             res.sendStatus(500)
           }
