@@ -6,13 +6,28 @@ const addMission = (req, res) => {
 
   const missionData = req.body
 
-  connection.query('INSERT INTO mission SET ?', missionData, (err, results) => {
+  // Add all missions
+  connection.query('SELECT COUNT(*) FROM parcelle', (err, result) => {
     if (err) {
-      res.status(500).send("Erreur lors de l'ajout de la mission")
-    } else {
-      res.json(results).send("Mission ajouté")
+      res.sendStatus(500)
     }
-  });
+    else {
+      const nbParcelles = result
+      for (let i = 0; i < missionData * (nbParcelles - 1); i++) {
+        missionData[i].push(missionData[i])
+      }
+      for (let i = 0; i < missionData; i++) {
+        connection.query('INSERT INTO missions (name) VALUES (?)', missionData[i].name, (err2, result2) => {
+          if (err2) {
+            res.sendStatus(500)
+          }
+          else {
+            res.status(200).send('Les missions de la production ont bien été ajoutées.')
+          }
+        })
+      }
+    }
+  })
 }
 
 // MODIFY a mission
@@ -32,7 +47,7 @@ const updateMission = (req, res) => {
 
 // DELETE a mission
 const deleteMission = (req, res) => {
-  
+
   const missionId = req.params.id;
 
   connection.query('DELETE FROM mission WHERE id = ?', missionId, (err, results) => {
