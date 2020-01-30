@@ -5,6 +5,7 @@ const connection = require('../conf');
 const addMission = (req, res) => {
 
   const missionData = req.body
+  console.log('First test')
 
   // Add all missions
   connection.query('SELECT COUNT(*) FROM parcelle', (err, result) => {
