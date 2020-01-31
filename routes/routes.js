@@ -42,6 +42,7 @@ router.get('/dashboard/task/:id', dashboardCollab.getTasksById);
 router.get('/dashboard/equipement/:id', dashboardCollab.getEquipementById);
 
 // Missions collaborateur
+router.post('/mission/add', missionCollab.addMission);
 router.get('/mission/:id', missionCollab.getMissionInfo);
 router.get('/mission/soustype/:mission_id', missionCollab.getMissionSousType);
 router.get('/mission/outil/:id', missionCollab.getTools);
