@@ -1,19 +1,5 @@
 const connection = require('../conf');
 
-// POST a new mission
-const addMission = (req, res) => {
-  const missionData = req.body
-  // Add all missions
-  connection.query('INSERT INTO mission SET ?', missionData, (err, result) => {
-    if (err) {
-      throw err
-      res.sendStatus(500)
-    }
-    else {
-      res.status(200).send('Les missions de la production ont bien été ajoutées.')
-    }
-  })
-}
 
 const getMissionInfo = (req, res) => {
   const missionId = req.params.id;
@@ -64,7 +50,6 @@ const getDateOfUseEquipment = (req, res) => {
 };
 
 module.exports = {
-  addMission,
   getMissionInfo,
   getMissionSousType,
   getTools,

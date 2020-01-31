@@ -8,11 +8,26 @@ const addMission = (req, res) => {
 
   connection.query('INSERT INTO mission SET ?', missionData, (err, results) => {
     if (err) {
+      throw err
       res.status(500).send("Erreur lors de l'ajout de la mission")
     } else {
       res.json(results).send("Mission ajouté")
     }
   });
+}
+
+// POST multiple missions
+const addMoreMissions = (req, res) => {
+  const postMission = req.body;
+
+  connection.query('INSERT INTO mission VALUES ?', postMission, (err, results) => {
+    console.log(err)
+    if (err) {
+      res.status(500).send("Erreur lors de l'ajout des missions")
+    } else {
+      res.json(results).send("Les missions ont été ajoutées")
+    }
+  })
 }
 
 // MODIFY a mission
@@ -47,6 +62,7 @@ const deleteMission = (req, res) => {
 
 module.exports = {
   addMission,
+  addMoreMissions,
   updateMission,
   deleteMission
 }

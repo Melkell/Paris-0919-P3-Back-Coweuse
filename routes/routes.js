@@ -68,6 +68,7 @@ router.get('/exploitation/:id/all-missions', exploitation.getAllMissionsByExploi
 router.get('/itineraire/:id/all-missions', itineraire.getAllMissionsByItineraireId)
 // POST - PUT - DELETE
 router.post('/mission/add', mission.addMission);
+router.post('/mission/add/more', mission.addMoreMissions);
 router.put('/mission/update/:id', mission.updateMission);
 router.delete('/mission/delete/:id', mission.deleteMission);
 
@@ -91,7 +92,6 @@ router.get('/dashboard/task/:id', dashboardCollab.getTasksById);
 router.get('/dashboard/equipement/:id', dashboardCollab.getEquipementById);
 
 // Missions collaborateur
-router.post('/mission/add', missionCollab.addMission);
 router.get('/mission/:id', missionCollab.getMissionInfo);
 router.get('/mission/soustype/:mission_id', missionCollab.getMissionSousType);
 router.get('/mission/outil/:id', missionCollab.getTools);
