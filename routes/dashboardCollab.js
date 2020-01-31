@@ -39,7 +39,11 @@ const getEquipements = (req, res) => {
 const getMissionById = (req, res) => {
   const missionId = req.params.id;
 
+<<<<<<< HEAD
+  connection.query('SELECT * FROM mission INNER JOIN mission_user WHERE user_id = ?', missionId, (err, results) => {
+=======
   connection.query('SELECT * FROM mission WHERE validation = 1', (err, results) => {
+>>>>>>> dd2ec2ff34a3de7f0ce0483b8cdb80eca1d8f0aa
     if (err) {
       res.status(500).send('Erreur lors de la récupération des missions');
     } else {
@@ -47,6 +51,18 @@ const getMissionById = (req, res) => {
     }
   });
 };
+
+const getEquipementById = (req, res) => {
+  const equipementId = req.params.id;
+
+  connection.query('SELECT name FROM equipement INNER JOIN mission_equipement WHERE mission_id = ?', equipementId, (err, results) => {
+    if (err) {
+      res.status(500).send('Erreur lors de la récupération des outils de la mission')
+    } else {
+      res.json(results);
+    }
+  });
+}
 
 const getTasksById = (req, res) => {
   const taskId = req.params.id
@@ -63,7 +79,11 @@ const getTasksById = (req, res) => {
 module.exports = {
   getMissionById,
   getTasksById,
+<<<<<<< HEAD
+  getEquipementById
+=======
   getMissions,
   getEquipements,
   putMissions
+>>>>>>> dd2ec2ff34a3de7f0ce0483b8cdb80eca1d8f0aa
 }

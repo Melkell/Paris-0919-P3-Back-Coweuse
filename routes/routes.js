@@ -9,7 +9,7 @@ const mission = require('./mission');
 const dashboardCollab = require('./dashboardCollab');
 const missionCollab = require('./missionCollab');
 const productionCollab = require('./productionCollab');
-const auth = require('./auth')
+const auth = require('./auth');
 const register = require('./register');
 
 // Authentification
@@ -88,8 +88,10 @@ router.put('/dashboard/missionsUser', dashboardCollab.putMissions);
 router.get('/dashboard/equipements', dashboardCollab.getEquipements);
 router.get('/dashboard/mission/:id', dashboardCollab.getMissionById);
 router.get('/dashboard/task/:id', dashboardCollab.getTasksById);
+router.get('/dashboard/equipement/:id', dashboardCollab.getEquipementById);
 
 // Missions collaborateur
+router.post('/mission/add', missionCollab.addMission);
 router.get('/mission/:id', missionCollab.getMissionInfo);
 router.get('/mission/soustype/:mission_id', missionCollab.getMissionSousType);
 router.get('/mission/outil/:id', missionCollab.getTools);
