@@ -21,7 +21,7 @@ const getAllMissionsByItineraireId = (req, res) => {
 //   const itineraireId = req.params.id
 //   const month = +req.params.month
 //   const year = +req.params.year
-  
+
 //   const startMonth = `${year}-${month}-01`
 //   let endMonth = `${year}-${month+1}-01`
 //   if (month == 12) {
@@ -29,7 +29,7 @@ const getAllMissionsByItineraireId = (req, res) => {
 //   } else {
 
 //   }
-  
+
 //   connection.query('SELECT mission.* FROM mission JOIN mission_type ON mission.mission_type_id = mission_type.id WHERE (mission.start_date >= ? AND mission.end_date <= ?) mission_type.itineraire_id = ?', itineraireId, startMonth, endMonth, (err, results) => {
 //     if (err) {
 //       console.log('err', err);
@@ -42,17 +42,38 @@ const getAllMissionsByItineraireId = (req, res) => {
 
 // POST a new itineraire
 const addItineraire = (req, res) => {
-
   const itineraireData = req.body
-
-  connection.query('INSERT INTO itineraire SET ?', itineraireData, (err, results) => {
-    if (err) {
-      res.status(500).send("Erreur lors de l'ajout de l'itinéraire")
-    } else {
-      res.json(results).send("Itineraire ajouté")
+  const parcelles = itineraireData.nbParcelles
+  const task = itineraireData.nbTask
+  for (const parcelle of parcelles) {
+    for (let i = 0; i < task; i++) {
+      const tache = i
+      const terrain = parcelle
+      connection.query(`INSERT INTO mission (name, tache_id, parcelle_id, itineraire_id, validation)
+      VALUES (
+        'mission',
+      (SELECT id
+         FROM tache
+         WHERE tache.id = 1
+        ),
+      (SELECT id
+         FROM parcelle
+         WHERE parcelle.id = 1
+        ),
+      (SELECT id
+         FROM itineraire
+         WHERE itineraire.id = 1
+        ),
+        0
+      )
+      `, [tache], (err) => {
+        if (err) {
+          res.status(500).send("Erreur lors de l'ajout de l'itinéraire")
+        }
+      });
     }
-  });
   }
+}
 
 // MODIFY an itineraire
 const updateItineraire = (req, res) => {
