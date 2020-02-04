@@ -18,6 +18,7 @@ router.post('/register', register);
 
 
 // Dashboard admin
+router.get('/exploitation/missions', exploitation.getExploitationMissions);
 router.get('/exploitation/name', exploitation.getExploitationName);
 router.get('/exploitation/:id', exploitation.getExploitationById);
 router.get('/exploitation/:id/nb-parcelles', exploitation.getNumberParcellesByExploitationId);
