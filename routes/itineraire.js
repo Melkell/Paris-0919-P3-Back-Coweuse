@@ -46,19 +46,18 @@ const addItineraire = (req, res) => {
   const parcelles = itineraireData.nbParcelles
   const task = itineraireData.nbTask
   for (const parcelle of parcelles) {
-    for (let i = 0; i < task; i++) {
-      const tache = i
-      const terrain = parcelle
+    for (let i = 1; i < task + 1; i++) {
+      console.log(i)
       connection.query(`INSERT INTO mission (name, tache_id, parcelle_id, itineraire_id, validation)
       VALUES (
         'mission',
       (SELECT id
          FROM tache
-         WHERE tache.id = 1
+         WHERE tache.id = ?
         ),
       (SELECT id
          FROM parcelle
-         WHERE parcelle.id = 1
+         WHERE parcelle.id = ?
         ),
       (SELECT id
          FROM itineraire
@@ -66,7 +65,7 @@ const addItineraire = (req, res) => {
         ),
         0
       )
-      `, [tache], (err) => {
+      `, [i, parcelle], (err) => {
         if (err) {
           res.status(500).send("Erreur lors de l'ajout de l'itinéraire")
         }
