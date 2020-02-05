@@ -6,6 +6,7 @@ const register = async (req, res) => {
   const formFirst_name = req.body.first_name;
   const formLast_name = req.body.last_name;
   const formEmail = req.body.email;
+  const role_id = req.body.role_id;
   const formPassword = req.body.password;
 
   // Hash passwords
@@ -15,6 +16,7 @@ const register = async (req, res) => {
   const user = {
     first_name : formFirst_name,
     last_name : formLast_name,
+    role_id : role_id,
     email : formEmail,
     password : hashedPassword
   }
@@ -26,6 +28,7 @@ const register = async (req, res) => {
 
   connection.query(`SELECT email FROM user WHERE email = ?`, user.email, (err, results) => {
     if (err) {
+      throw err
       return res.status(500).send('Internal servor error')
     } else if (results.length>0) {
       return res.status(409).send('User already exists')
@@ -37,8 +40,9 @@ const register = async (req, res) => {
         return res.status(500).send('Cannot register the user')
       }
 
-      connection.query(`SELECT id, first_name, last_name, email FROM user WHERE id = ?`, results.insertId, (err, results) => {
+      connection.query(`SELECT id, first_name, last_name, role_id, email FROM user WHERE id = ?`, results.insertId, (err, results) => {
         if (err) {
+          throw err
           return res.status(500).send('Internal servor error')
         }
         res.status(200).send(results)
